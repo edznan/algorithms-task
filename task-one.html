@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1</title>
+</head>
+
+<body>
+
+    <script>
+        const array = [
+            {
+                id: 1,
+                value: 3
+            },
+            {
+                id: 2,
+                value: 7
+            },
+            {
+                id: 3,
+                value: 3
+            },
+            {
+                id: 7,
+                value: 6
+            },
+            {
+                id: 4,
+                value: 12
+            },
+            {
+                id: 14,
+                value: 1
+            },
+            {
+                id: 8,
+                value: 2
+            },
+            {
+                id: 5,
+                value: 4
+            },
+            {
+                id: 6,
+                value: 19
+            }
+        ];
+
+
+        // calculating ID in order to get the unique next positive integer
+        function calculateId(array) {
+            const idsArray = array.map(item => item.id);
+            idsArray.sort((a, b) => a - b);
+
+            for (let i = 1; i <= idsArray.length; i++) {
+                if (idsArray.indexOf(i) === -1) {
+                    return i;
+                }
+            }
+
+            if (Math.max(...idsArray) > 0) {
+                return Math.max(...idsArray) + 1;
+            } else {
+                return 1;
+            }
+        }
+        const id = calculateId(array);
+
+        // please note...
+        // calculating the value in order to get an integer that is smaller than a newly calculated ID
+        // the task says "... one smaller integer appearing at least twice in the same list"
+        // so I guess that there was a mistake in solution because the number 5 did not appear twice in the list as a value of 'value'
+        // this function is looking for a duplicate value in order to find a number that appears at least twice and is smaller than the new ID 
+        function calculateValue(array) {
+            const valuesArray = array.map(item => item.value);
+            const duplicateValues = checkForDuplicates(valuesArray);
+            if (duplicateValues && duplicateValues !== undefined && duplicateValues[0] < id) {
+                return duplicateValues[0];
+            } else {
+                valuesArray.slice().reverse().forEach(value => {
+                    if (value < id) {
+                        return value;
+                    }
+                });
+            }
+        }
+
+        function checkForDuplicates(array) {
+            return array.filter((item, index) => array.indexOf(item) !== index && item < id);
+        }
+
+        const value = calculateValue(array);
+
+        const newObj = { id, value };
+        array.push(newObj);
+
+        console.log(array)    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+</head>
+
+<body>
+
+    <label for="inputPath">Enter path here</label>
+    <input type="text" placeholder="Example: fruits.exotic" id="inputPath">
+    <br>
+    <br>
+    <div>
+        <p>object:</p>
+        <ul>
+            <li>
+                <ul>
+                    <li>fruits:</li>
+                    <ul>
+                        <li>citrus: 'lemon'</li>
+                        <li>exotic: 'mango'</li>
+                        <li>berry: 'raspberry'</li>
+                        <li>melon: 'rockmelon'</li>
+                    </ul>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>veggies:</li>
+                    <ul>
+                        <li>allium: 'garlic'</li>
+                        <li>root: 'potato'</li>
+                        <li>marrow: 'cucumber'</li>
+                        <li>beans: 'chickpeas'</li>
+                    </ul>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <br>
+    <h2 id="output">Result: <i></i></h2>
+
+    <script>
+
+        NOT_EXIST_ERROR = 'Path doesn\'t exist';
+        WRONG_INPUT_ERROR = 'Wrong input format.';
+
+        const object = {
+            fruits: {
+                citrus: 'lemon',
+                exotic: 'mango',
+                berry: 'raspberry',
+                melon: 'rockmelon'
+            },
+            veggies: {
+                allium: 'garlic',
+                root: 'potato',
+                marrow: 'cucumber',
+                beans: 'chickpeas'
+            }
+        };
+
+        function lookup(obj, path) {
+            const properties = path.split('.');
+            let newObject = obj;
+
+            if (properties.length === 2) {
+                for (let i = 0; i < properties.length; ++i) {
+                    if (newObject[properties[i]] && newObject[properties[i]] !== undefined) {
+                        newObject = newObject[properties[i]];
+                    } else {
+                        newObject = NOT_EXIST_ERROR;
+                    }
+                }
+            } else {
+                newObject = WRONG_INPUT_ERROR;
+            }
+            return newObject;
+        }
+
+
+        const inputPath = document.querySelector("#inputPath");
+        inputPath.addEventListener('input', (e) => {
+            const input = e.target.value;
+            document.querySelector("#output i").innerHTML = '--';
+            if (input.includes('.')) {
+                const res = lookup(object, input);
+                document.querySelector("#output i").innerHTML = res;
+            }
+        });    
+    </script>
+</body>
+
+</html>
