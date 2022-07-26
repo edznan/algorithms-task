@@ -10,6 +10,39 @@
 
 <body>
 
+    <h2>Task</h2>
+
+    <p>
+        For a random array of structs of type { id, value }, return a new struct, with an unique id and a
+        value such as the next positive integer, which isn't present in the existing structure list and with
+        at least one smaller integer appearing at least twice in the same list.
+    </p>
+
+    <p>
+        For example: 
+        <br>
+        <code> a = [{id:1, value:3}, {id:2, value:7}, {id:3, value:3}, {id:4, value:1}, {id:5, value:4}]</code>
+    </p>
+
+    <ul>
+        <li>
+            value 1 - appears once
+        </li>
+        <li>
+            value 3 - appears  2 times
+        </li>
+        <li>
+            value 4 - appears once
+        </li>
+        <li>
+            value 7 - appears once
+        </li>
+    </ul>
+
+    <p>
+        <b>Solution: {id: 6, value: 5}</b>
+    </p>
+
     <script>
         const array = [
             {
